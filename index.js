@@ -1,9 +1,16 @@
 const express = require("express");
+const { Client } = require("pg");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello, Docker!");
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+});
+client.connect();
+
+app.get("/", async (req, res) => {
+  const result = await client.query("SELECT NOW()");
+  res.send(`Connected to PostgreSQL at: ${result.rows[0].now}`);
 });
 
 app.listen(port, () => {
