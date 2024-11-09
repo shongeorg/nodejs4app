@@ -11,6 +11,7 @@ services:
       - .:/app
     depends_on:
       - db
+    command: sh -c "npm install && npm start" # Це додасть команду для запуску додатку після встановлення залежностей
 
   db:
     image: postgres:15

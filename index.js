@@ -2,6 +2,7 @@ const express = require("express");
 const { Client } = require("pg");
 const app = express();
 const port = 3000;
+require("dotenv").config();
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
